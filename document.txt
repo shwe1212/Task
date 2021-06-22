@@ -1,0 +1,489 @@
+Create Maven Project
+
+
+
+Web.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema- instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web- app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+
+<display-name>RESTful CRUD Example</display-name>
+
+<servlet>
+<servlet-name>jerseyServlet</servlet-name>
+<servlet- class>com.sun.jersey.spi.container.servlet.ServletContainer
+</servlet-class>
+<init-param>
+<param- name>com.sun.jersey.config.property.packages</param-name>
+ 
+
+value>
+ 
+<param-value>org.o7planning.restfulcrud</param-
+
+</init-param>
+<load-on-startup>1</load-on-startup>
+ 
+</servlet>
+<servlet-mapping>
+<servlet-name>jerseyServlet</servlet-name>
+<url-pattern>/rest/*</url-pattern>
+</servlet-mapping>
+<web->
+
+
+
+Pom.xml
+
+<project xmlns=http://maven.apache.org/POM/4.0.0
+
+Xmlns:xsi=http://www.w3.org/2001/XMLSchema-instance
+
+Xsi:schemaLocation=”http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/maven-v4_0_0.xsd”>
+
+
+
+
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.o7planning</groupId>
+<artifactId>RESTfulCRUD</artifactId>
+<packaging>war</packaging>
+<version>0.0.1-SNAPSHOT</version>
+<name>RESTfulCRUD Maven Webapp</name>
+ 
+<url>http://maven.apache.org</url>
+
+
+<dependencies>
+
+
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>3.8.1</version>
+<scope>test</scope>	</dependency>
+<!—https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api 
+<dependency>
+<groupId>javax.servlet</groupId>
+<artifactId>javax.servlet-api</artifactId>
+<version>3.1.0</version>
+<scope>provided</scope>
+</dependency>
+
+
+<!—https://mvnrepository.com/artifact/asm/asm 
+<dependency>
+<groupId>asm</groupId>
+<artifactId>asm</artifactId>
+<version>3.3.1</version>
+</dependency>
+
+
+<!—https://mvnrepository.com/artifact/com.sun.jersey/jersey-bundle 
+<dependency>
+<groupId>com.sun.jersey</groupId>
+<artifactId>jersey-bundle</artifactId>
+<version>1.19.2</version>
+ 
+</dependency>
+
+
+<!—https://mvnrepository.com/artifact/org.json/json 
+<dependency>
+<groupId>org.json</groupId>
+<artifactId>json</artifactId>
+<version>20160810</version>
+</dependency>
+
+
+<!—https://mvnrepository.com/artifact/com.sun.jersey/jersey-server 
+<dependency>
+<groupId>com.sun.jersey</groupId>
+<artifactId>jersey-server</artifactId>
+<version>1.19.2</version>
+</dependency>
+
+
+<!—https://mvnrepository.com/artifact/com.sun.jersey/jersey-core 
+<dependency>
+<groupId>com.sun.jersey</groupId>
+<artifactId>jersey-core</artifactId>
+<version>1.19.2</version>
+</dependency>
+
+
+
+
+<!—https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl 
+<dependency>
+<groupId>org.codehaus.jackson</groupId>
+<artifactId>jackson-mapper-asl</artifactId>
+<version>1.9.13</version>
+ 
+</dependency>
+
+
+
+
+</dependencies>
+
+
+<build>
+<finalName>RESTfulCRUD</finalName>
+<plugins>
+<plugin>
+<groupId>org.apache.tomcat.maven</groupId>
+<artifactId>tomcat7-maven-plugin</artifactId>
+<version>2.2</version>
+<configuration>
+<path>/RESTfulCRUD</path>
+<port>8080</port>
+</configuration>
+</plugin>
+
+
+</plugins>
+</build>
+
+
+
+
+</project>
+ 
+EmployeeDAO.java
+
+Package org.o7planning.restfulcrud.dao;
+
+
+Import java.util.ArrayList; Import java.util.Collection; Import java.util.HashMap; Import java.util.List; Import java.util.Map;
+
+Import org.o7planning.restfulcrud.model.Employee;
+
+
+Public class EmployeeDAO {
+
+
+Private static final Map<String, Employee> empMap = new HashMap<String, Employee>();
+
+
+Static {
+initEmps();
+}
+
+
+Private static void initEmps() {
+Employee empid= new Employee(“E01”); Employee empname = new Employee(“Sushant”); Employee empLname = new Employee(“naik”);
+Employee empsdate= new Employee(“01/01/2020”);
+Employee empdesignation= new Employee(“manager”);
+Employee empDepartment = new Employee(“java developer”);
+ 
+Employee empEdate= new Employee(“04/07/2021”);
+Employee empstatus = new Employee(“managing department”); Employee empdob = new Employee(“01/01/2000”);
+Employee emportingmanager= new Employee(“radha”); Employee empgender = new Employee(“femal”); Employee empaddress= new Employee(“murdeshwar”);
+
+
+
+empMap.put(empid.getEmpId(), empid); empMap.put(empname.getEmpName(), empname); empMap.put(empLname.getEmpLname(), empLname);
+empMap.put(empsdate.getEmpsdate(), empsdate);
+empMap.put(empdesignation.getEmpdesignatuon(), empdesignation); empMap.put(empdepartment.getEmpdepartment(), empdepartment);
+empMap.put(empEdate.getEmpEdate(), empEdate);
+
+
+
+
+empMap.put(empsratus.getEmpStatus(), empstatus);
+
+
+empMap.put(empdob.getEmpDod(), empdob);
+empMap.put(empreportingmanager.getEmpReportingmanager(), empreporting manager); empMap.put(empgender.getEmpGender(), empgender);
+
+
+empMap.put(empbloodgroup.getEmpBloodgroup(), empbloodgroup);
+
+
+empMap.put(empaddress.getEmpAddress(), empaddress);
+
+
+}
+ 
+Public static Employee getEmployee(String empNo) { Return empMap.get(empNo);
+}
+
+
+Public static Employee addEmployee(Employee emp) { empMap.put(emp.getEmpNo(), emp);
+return emp;
+}
+
+
+Public static Employee updateEmployee(Employee emp) { empMap.put(emp.getEmpNo(), emp);
+return emp;
+}
+
+
+Public static void deleteEmployee(String empNo) { empMap.remove(empNo);
+}
+
+
+Public static List<Employee> getAllEmployees() { Collection<Employee> c = empMap.values(); List<Employee> list = new ArrayList<Employee>(); List.addAll©;
+Return list;
+}
+
+
+List<Employee> list;
+
+
+}
+ 
+Employee.java
+Package org.o7planning.restfulcrud.model;
+
+
+Import javax.xml.bind.annotation.XmlAccessType; Import javax.xml.bind.annotation.XmlAccessorType; Import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = “employee”) @XmlAccessorType(XmlAccessType.FIELD) Public class Employee {
+
+Private String empid; Private String empName; Private String Lname;
+
+Private String empsdate;
+
+
+Private String empdesignation;
+
+
+Private String empdepartment; Private String empEdate; Private String empsatuts; Private String empdob;
+Private String empreporting manager; Private String empgender;
+Private String empbloodgroup; Private String empaddress;
+// This default constructor is required if there are other constructors.
+ 
+Public Employee() {
+
+
+}
+
+
+Public Employee(String empid, String empName, String empLname,String empsdate, String empdesignation, String empdepartment, String empEdate, String empsatuts, String empdob, String empreportingmanager, String empgender, String empbloodgroup, String empaddress) {
+This.empid = empId; This.empName = empName; This.empLname = empLname; This.empsdate = empsdate;
+
+This.empdeparment = empdeparment; This.empEdate = empEdate;
+
+This.empstatus = empstatus; This.empdob = empdob;
+This.empreportingmanager = empreportingmqnager; This.empgender = empgender;
+This.empbloodgroup = empbloodgroup; This.empaddress= empaddress;
+}
+
+
+Public String getEmpNo() { Return empNo;
+}
+
+
+Public void setEmpid(String empid) { This.empid= empid;
+ 
+}
+
+
+Public String getEmpName() { Return empName;
+}
+
+
+Public void setEmpName(String empName) { This.empName = empName;
+}
+
+
+Public String getPosition() { Return position;
+}
+
+
+Public void setPosition(String position) { This.position = position;
+}
+
+
+}
+
+
+EmployeeService.java
+
+Package org.o7planning.restfulcrud.service; Import java.util.List;
+Import javax.ws.rs.DELETE; Import javax.ws.rs.GET; Import javax.ws.rs.POST;
+ 
+Import javax.ws.rs.PUT; Import javax.ws.rs.Path; Import javax.ws.rs.PathParam; Import javax.ws.rs.Produces;
+Import javax.ws.rs.core.MediaType;
+Import org.o7planning.restfulcrud.dao.EmployeeDAO; Import org.o7planning.restfulcrud.model.Employee; @Path(“/employees”)
+Public class EmployeeService {
+// URI:
+
+
+// /contextPath/servletPath/employees
+
+
+@GET
+
+
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+
+
+Public List<Employee> getEmployees_JSON() {
+
+
+List<Employee> listOfCountries = EmployeeDAO.getAllEmployees();
+
+
+Return listOfCountries;
+
+
+}
+
+
+
+
+
+// URI:
+ 
+// /contextPath/servletPath/employees/{empNo}
+
+
+@GET
+
+
+@Path(“/{empid}”)
+
+
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+
+
+Public Employee getEmployee(@PathParam(“empid”) String empid) {
+
+
+Return EmployeeDAO.getEmployee(empid);
+
+
+}
+
+
+
+
+
+// URI:
+
+
+// /contextPath/servletPath/employees
+
+
+@POST
+
+
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+
+
+Public Employee addEmployee(Employee emp) {
+
+
+Return EmployeeDAO.addEmployee(emp);
+
+
+}
+ 
+
+
+
+
+
+// URI:
+
+
+// /contextPath/servletPath/employees
+
+
+@PUT
+
+
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+
+
+Public Employee updateEmployee(Employee emp) {
+
+
+Return EmployeeDAO.updateEmployee(emp);
+
+
+}
+
+
+@DELETE
+
+
+@Path(“/{empid}”)
+
+
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+
+
+Public void deleteEmployee(@PathParam(“empNo”) String empid) {
+
+
+EmployeeDAO.deleteEmployee(empid);
+
+
+}
+ 
+
+
+
+
+
+
+
+Restful web service is used to convert a java object int xml
+
+@xmlRootElement( name=”employee”) @xmlAccessorType(xmlAccessType.FIELD) Public class Employee
+{
+Private String empId;
+Private String empname;
+Private String empLname;
+Private String empstringdate; Private String Designation; Private String Department; Private String empenddate; Private String empstatus; Private String empdob;
+Private String reportingmanager; Private String gender;
+Private String bloodgroup; Private String address;
+}
+Employee empid=
+New Employee (“E01”,”smith”,”naik”,”01/0/2000”javadevloper”, “softwaredeveloper”,”04/07/2021”,“Employee”, ”femal”,”o+ve”,“Murdeshwar”);
+ 
+
+<employee>
+<empID>E01</empID>
+<empname>Smith</empname>
+<empLname>naik</empLname>
+<empSdate>01/01/2020</empSdate>
+<Designation>Java developer<Designation>
+<Department>software developer</Department>
+<empEdate>04/07/2021</empEdate>
+<empstatus>employee</empstatus>
+<empdob>01/01/2000</empdob>
+<reportingmanager>nisha</reportingmanager>
+<gender>Femal</gender>
+<bloodgroup>o+ve</bloodgroup>
+<address>Murdeshwar</address>
+</employee>
+
+
+
+
+
+
+
+Import java unit;
+Class Employee public static void main(string[]arts) Public static void main( String [args])
+{
+Int emid empname……etc “Employee”:[
+{
+“ empid”:”EO1”
+“empname”:”smith”
+ 
+“empLname”:”naik” “empsdate”:”01/01/2020” “Designation”:”java developer”
+“Department”:”software developer” “empEdate”:”04/07/2021”
+“empstatus”:”employee” “empdob”:”01/01/2000
+“reportingmanager”:”Nishy” “gender”:”femal” “bloodgroup”:”o+ve” “address”:”murdeshware”
+},
+]
+}
